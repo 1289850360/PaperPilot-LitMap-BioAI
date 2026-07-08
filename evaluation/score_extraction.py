@@ -18,6 +18,8 @@ from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Iterable
 
+from schema_normalization import canonicalize_value
+
 
 DEFAULT_FIELDS = [
     "task",
@@ -224,6 +226,8 @@ def update_score(
     strong_threshold: float,
     partial_threshold: float,
 ) -> None:
+    pred_values = dedupe_values_by_schema(score.field, pred_values)
+    gold_values = dedupe_values_by_schema(score.field, gold_values)
     gold_present = bool(gold_values)
     pred_present = bool(pred_values)
 
@@ -250,13 +254,13 @@ def update_score(
     if not gold_present and not pred_present:
         return
 
-    matched_pred, matched_gold = match_values(pred_values, gold_values, strong_threshold)
+    matched_pred, matched_gold = match_values(score.field, pred_values, gold_values, strong_threshold)
     score.matched_pred_values += len(matched_pred)
     score.matched_gold_values += len(matched_gold)
     score.unsupported_pred_values += max(0, len(pred_values) - len(matched_pred))
     score.missed_gold_values += max(0, len(gold_values) - len(matched_gold))
 
-    best_similarity = best_match_similarity(pred_values, gold_values)
+    best_similarity = best_match_similarity(score.field, pred_values, gold_values)
 
     if best_similarity >= strong_threshold:
         score.exact_or_strong += 1
@@ -267,11 +271,12 @@ def update_score(
     else:
         score.incorrect += 1
 
-    if has_unsupported_prediction(pred_values, gold_values, strong_threshold):
+    if has_unsupported_prediction(score.field, pred_values, gold_values, strong_threshold):
         score.hallucinated += 1
 
 
 def match_values(
+    field: str,
     pred_values: list[str],
     gold_values: list[str],
     strong_threshold: float,
@@ -279,7 +284,7 @@ def match_values(
     candidates: list[tuple[float, int, int]] = []
     for pred_index, pred in enumerate(pred_values):
         for gold_index, gold in enumerate(gold_values):
-            similarity = value_similarity(pred, gold)
+            similarity = value_similarity(pred, gold, field)
             if similarity >= strong_threshold:
                 candidates.append((similarity, pred_index, gold_index))
 
@@ -293,17 +298,17 @@ def match_values(
     return matched_pred, matched_gold
 
 
-def best_match_similarity(pred_values: Iterable[str], gold_values: Iterable[str]) -> float:
+def best_match_similarity(field: str, pred_values: Iterable[str], gold_values: Iterable[str]) -> float:
     best = 0.0
     for pred in pred_values:
         for gold in gold_values:
-            best = max(best, value_similarity(pred, gold))
+            best = max(best, value_similarity(pred, gold, field))
     return best
 
 
-def value_similarity(pred: str, gold: str) -> float:
-    pred_norm = normalize(pred)
-    gold_norm = normalize(gold)
+def value_similarity(pred: str, gold: str, field: str = "") -> float:
+    pred_norm = canonicalize_value(field, pred) if field else normalize(pred)
+    gold_norm = canonicalize_value(field, gold) if field else normalize(gold)
     if not pred_norm or not gold_norm:
         return 0.0
     if pred_norm == gold_norm or pred_norm in gold_norm or gold_norm in pred_norm:
@@ -312,12 +317,13 @@ def value_similarity(pred: str, gold: str) -> float:
 
 
 def has_unsupported_prediction(
+    field: str,
     pred_values: Iterable[str],
     gold_values: Iterable[str],
     strong_threshold: float,
 ) -> bool:
     for pred in pred_values:
-        if best_match_similarity([pred], gold_values) < strong_threshold:
+        if best_match_similarity(field, [pred], gold_values) < strong_threshold:
             return True
     return False
 
@@ -326,6 +332,18 @@ def normalize(value: str) -> str:
     value = value.lower()
     value = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", " ", value)
     return re.sub(r"\s+", " ", value).strip()
+
+
+def dedupe_values_by_schema(field: str, values: list[str]) -> list[str]:
+    seen: set[str] = set()
+    result: list[str] = []
+    for value in values:
+        key = canonicalize_value(field, value)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        result.append(value)
+    return result
 
 
 def build_summary(

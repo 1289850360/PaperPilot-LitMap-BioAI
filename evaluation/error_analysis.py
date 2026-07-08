@@ -12,7 +12,7 @@ import argparse
 import csv
 from pathlib import Path
 
-from score_extraction import load_rows, row_key, split_values, value_similarity
+from score_extraction import dedupe_values_by_schema, load_rows, row_key, split_values, value_similarity
 
 
 def main() -> None:
@@ -35,7 +35,9 @@ def main() -> None:
         for field in args.fields:
             pred_values = split_values(pred_row.get(field, ""))
             gold_values = split_values(gold_row.get(field, ""))
-            matched_pred, matched_gold = match_values(pred_values, gold_values, args.strong_threshold)
+            pred_values = dedupe_values_by_schema(field, pred_values)
+            gold_values = dedupe_values_by_schema(field, gold_values)
+            matched_pred, matched_gold = match_values(field, pred_values, gold_values, args.strong_threshold)
             unsupported = [value for index, value in enumerate(pred_values) if index not in matched_pred]
             missed = [value for index, value in enumerate(gold_values) if index not in matched_gold]
 
@@ -101,6 +103,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def match_values(
+    field: str,
     pred_values: list[str],
     gold_values: list[str],
     strong_threshold: float,
@@ -108,7 +111,7 @@ def match_values(
     candidates: list[tuple[float, int, int]] = []
     for pred_index, pred in enumerate(pred_values):
         for gold_index, gold in enumerate(gold_values):
-            similarity = value_similarity(pred, gold)
+            similarity = value_similarity(pred, gold, field)
             if similarity >= strong_threshold:
                 candidates.append((similarity, pred_index, gold_index))
 

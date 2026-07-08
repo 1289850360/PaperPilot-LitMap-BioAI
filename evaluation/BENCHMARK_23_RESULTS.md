@@ -142,6 +142,33 @@ Score after evaluating the same `schema v7 + value verifier` predictions against
 
 The curated v2 benchmark reaches the target value precision threshold of 85%. The remaining gap is mostly recall and hallucination rate, especially in `models_or_methods` and `metrics`, where the system still extracts plausible but schema-ambiguous values.
 
+## Schema Normalization Pass
+
+A schema-aware normalization layer was added for evaluation:
+
+```text
+evaluation/schema_normalization.py
+```
+
+It canonicalizes obvious aliases before scoring. Examples:
+
+- `PB-valid`, `PoseBusters validity`, and `PoseBusters pass rate` -> `posebusters physical validity`
+- `runtime`, `inference time`, and `prediction speed` -> `runtime speed`
+- `CPU memory usage` and `CPU memory` -> `cpu memory`
+- `RMSD < 2 Å`, `RMSD <= 2`, and `fraction of predictions with RMSD < 2` -> `ligand rmsd under 2 success rate`
+- `NeuralPLexer3 / NP3` and `NP3` -> `neuralplexer3`
+
+The scorer now also de-duplicates values after canonicalization, so extracting both `runtime` and `inference time` no longer counts as one correct value plus one hallucination.
+
+Score impact on the curated v2 benchmark:
+
+| Scoring Mode | Field Accuracy | Value Precision | Value Recall | Value F1 | Missing Rate | Hallucination Rate |
+|---|---:|---:|---:|---:|---:|---:|
+| raw string matching | 96.2% | 85.0% | 62.9% | 72.3% | 1.1% | 41.8% |
+| schema-normalized matching | 96.2% | 85.5% | 64.2% | 73.3% | 1.1% | 42.9% |
+
+The improvement is modest but important: schema normalization mainly fixes metric aliasing and duplicate predictions. It does not solve missing recall for `models_or_methods`, because many missing method values are not aliasing problems; they are extraction-recall problems.
+
 The hallucination rate remains high under the current scoring setup because the gold file is intentionally compact while the extractor now returns broader value sets. Many "unsupported predictions" in the error report are values supported by the source PDF but not included in the manually curated gold row. This means the next evaluation step should separate:
 
 - unsupported-by-PDF hallucinations
@@ -187,11 +214,14 @@ evaluation/results_benchmark_23_schema_v7_verified_curated_gold_v2/score_summary
 evaluation/benchmark_23_pipeline_comparison.md
 evaluation/gold_refinement_score_comparison.md
 evaluation/gold_refinement_score_comparison_v2.md
+evaluation/schema_normalization_score_comparison.md
 evaluation/error_analysis_benchmark_23_schema_v5.md
 evaluation/error_analysis_benchmark_23_schema_v5.csv
 evaluation/error_analysis_benchmark_23_schema_v6_verified.md
 evaluation/error_analysis_benchmark_23_schema_v6_verified.csv
 evaluation/error_analysis_benchmark_23_schema_v7_verified_curated_gold_v2.md
 evaluation/error_analysis_benchmark_23_schema_v7_verified_curated_gold_v2.csv
+evaluation/error_analysis_benchmark_23_schema_v7_verified_curated_gold_v2_normalized.md
+evaluation/error_analysis_benchmark_23_schema_v7_verified_curated_gold_v2_normalized.csv
 evaluation/benchmark_scale_comparison.md
 ```
