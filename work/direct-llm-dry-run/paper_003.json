@@ -1,0 +1,17 @@
+{
+  "title": "Harmonic Self-Conditioned Flow Matching",
+  "filename": "a867eca208ff4aa98e07dd3627891dda_HarmonicFlow-2310.05764.pdf",
+  "page_count": 27,
+  "card": {
+    "task": [],
+    "datasets": [],
+    "models_or_methods": [],
+    "baselines": [],
+    "metrics": [],
+    "main_result": [],
+    "limitations": [],
+    "code_availability": []
+  },
+  "dry_run_prompt_path": "work\\direct-llm-dry-run\\paper_003_prompt.txt",
+  "paper_id": "paper_003"
+}

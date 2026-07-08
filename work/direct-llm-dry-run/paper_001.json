@@ -1,0 +1,17 @@
+{
+  "title": "NeuralPLexer3: Accurate Biomolecular Complex",
+  "filename": "afb6b0e0f09f4371b1b7db8fc0b4a6c1_2412.10743v2.pdf",
+  "page_count": 31,
+  "card": {
+    "task": [],
+    "datasets": [],
+    "models_or_methods": [],
+    "baselines": [],
+    "metrics": [],
+    "main_result": [],
+    "limitations": [],
+    "code_availability": []
+  },
+  "dry_run_prompt_path": "work\\direct-llm-dry-run\\paper_001_prompt.txt",
+  "paper_id": "paper_001"
+}

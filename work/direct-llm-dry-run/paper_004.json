@@ -1,0 +1,17 @@
+{
+  "title": "Published as a conference paper at ICLR 2025",
+  "filename": "2c68684cda834cacb44a22380eecccd9_ICLR-2025-composing-unbalanced-flows-for-flexible-docking-and-relaxation-Paper-Conference.pdf",
+  "page_count": 24,
+  "card": {
+    "task": [],
+    "datasets": [],
+    "models_or_methods": [],
+    "baselines": [],
+    "metrics": [],
+    "main_result": [],
+    "limitations": [],
+    "code_availability": []
+  },
+  "dry_run_prompt_path": "work\\direct-llm-dry-run\\paper_004_prompt.txt",
+  "paper_id": "paper_004"
+}

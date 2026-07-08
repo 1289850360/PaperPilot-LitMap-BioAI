@@ -1,0 +1,70 @@
+You are extracting structured information from a biomedical AI paper.
+
+Return JSON only. Do not include markdown.
+
+Use document-level evidence from the source text. Prefer canonical names.
+Extract concise normalized values. If a field is not supported, return an empty list.
+
+Field definitions:
+- task: main scientific or engineering tasks solved by the paper.
+- datasets: named datasets, benchmarks, evaluation sets, or important splits.
+- models_or_methods: proposed method, central model family, and key method components.
+- baselines: comparison methods, baseline systems, and reference tools.
+- metrics: evaluation metrics, success criteria, and efficiency measures.
+- main_result: main quantitative or qualitative results.
+- limitations: stated limitations or clear failure modes.
+- code_availability: code, repository, implementation, or data availability statements.
+
+Expected JSON schema:
+{
+  "task": [
+    "..."
+  ],
+  "datasets": [
+    "..."
+  ],
+  "models_or_methods": [
+    "..."
+  ],
+  "baselines": [
+    "..."
+  ],
+  "metrics": [
+    "..."
+  ],
+  "main_result": [
+    "..."
+  ],
+  "limitations": [
+    "..."
+  ],
+  "code_availability": [
+    "..."
+  ]
+}
+
+Paper title:
+ForceFM: Enhancing Protein-Ligand Predictions
+
+Abstract:
+Molecular docking is a fundamental technique in structure-based drug discovery, playing a critical role in predicting the binding poses of protein-ligand complexes. While traditional docking methods are generally reliable, they are often compu- tationally expensive. Recent deep learning (DL) approaches have substantially accelerated docking and improved prediction accuracy; however, they frequently generate conformations that lack physical plausibility due to insufficient integration of physical priors. To deal with these challenges, we propose ForceFM, a novel force-guided model that integrates a force-guided network into the generation process, steering ligand poses toward low-energy, physically realistic conforma- tions. Force guidance also halves inference cost compared with the unguided approaches. Importantly, replacing the guiding potential with diverse energy functions-including Vina, Glide, Gnina, and Confscore-preserves or improves performance, underscoring the method’s generality and robustness. These results highlight ForceFM’s ability to set new standards in docking accuracy and physical consistency, surpassing the limitations of previous methods. Code is available at https://github.com/Guhuary/ForceFM.
+
+Source text:
+[p. 1-1, Front matter]
+ForceFM: Enhancing Protein-Ligand Predictions through Force-Guided Flow Matching Huanlei Guo1 Song Liu1 Bingyi Jing123∗ 1 Department of Statistics and Data Science, Southern University of Science and Technology 2 School of Artificial Intelligence, The Chinese University of Hong Kong, Shenzhen 3 Shenzhen Loop Area Institute
+
+[p. 1-1, Abstract]
+Abstract Molecular docking is a fundamental technique in structure-based drug discovery, playing a critical role in predicting the binding poses of protein-ligand complexes. While traditional docking methods are generally reliable, they are often compu- tationally expensive. Recent deep learning (DL) approaches have substantially accelerated docking and improved prediction accuracy; however, they frequently generate conformations that lack physical plausibility due to insufficient integration of physical priors. To deal with these challenges, we propose ForceFM, a novel force-guided model that integrates a force-guided network into the generation process, steering ligand poses toward low-energy, physically realistic conforma- tions. Force guidance also halves inference cost compared with the unguided approaches. Importantly, replacing the guiding potential with diverse energy functions-including Vina, Glide, Gnina, and Confscore-preserves or improves performance, underscoring the method’s generality and robustness. These results highlight ForceFM’s ability to set new standards in docking accuracy and physical consistency, surpassing the limitations of previous methods. Code is available at https://github.com/Guhuary/ForceFM. 1
+
+[p. 1-2, Introduction]
+Introduction Molecular docking is a critical component of structure-based drug discovery [1], aiming to predict the predominant binding modes of protein-ligand complexes based on experimentally determined or computationally modeled protein structures and ligands. Traditional docking programs such as AutoDock 4 [2], AutoDock Vina [3], Glide [4], and GOLD [5] use heuristic search algorithms to explore a range of possible ligand conformations. These programs employ scoring functions grounded in physics and chemistry principles to estimate binding strengths and select optimal poses. Despite their effectiveness, these classical methods often involve high computational costs, leading to slow processing and significant resource demands, which limit their applicability in large-scale drug discovery projects. In high-throughput screening scenarios, researchers may need to dock millions of molecules daily. The prohibitive runtime of traditional methods thus significantly constrains their utility in practical pharmaceutical pipelines. Motivated by the success of deep learning (DL) and geometric learning (GL) in diverse 3D generation tasks in the vision community, recent works have begun to leverage these techniques for molecular docking. This has given rise to two broad categories of DL-based docking approaches. The first category encompasses regression-based models, which directly predict the ligand coordinates in 3D space [6, 7, 8, 9]. The second category relies on generative modeling, producing multiple candidate poses for selection [10, 11, 12]. Although these methods significantly improve efficiency ∗Corresponding authors: Bingyi Jing (jingby@sustech.edu.cn). 39th Conference on Neural Information Processing Systems (NeurIPS 2025). Figure 1: Overview of ForceFM. The baseline f
+
+[p. 1-2, Introduction]
+y improve efficiency ∗Corresponding authors: Bingyi Jing (jingby@sustech.edu.cn). 39th Conference on Neural Information Processing Systems (NeurIPS 2025). Figure 1: Overview of ForceFM. The baseline flow matching model operates on translational, rota-
+
+[p. 1-2, Introduction]
+Jing (jingby@sustech.edu.cn). 39th Conference on Neural Information Processing Systems (NeurIPS 2025). Figure 1: Overview of ForceFM. The baseline flow matching model operates on translational, rota- tional, and torsional degrees of freedom. By incorporating additional force guidance based on physi- cal principles, ForceFM generates ligands with lower energy. Color scheme: Blue—initialization, Green—ground truth, Red—sampled ligand without force guidance, Purple—sampled ligand with force guidance. and accuracy (e.g., in terms of the root-mean-square deviation, RMSD), a notable shortcoming remains: many generated conformations are physically implausible, exhibiting steric clashes or residing in high-energy regions [13], primarily because physical priors are under-utilized in the model design. However, purely data-driven methods often fail to incorporate critical physical constraints, which can lead to unphysical poses. In real-world drug discovery, low-energy and physically consistent poses are vital. To address this gap and combine the advantages of both traditional physics-based approaches and deep generative methods, we propose a novel force-guided flow matching model called ForceFM. Specifically, ForceFM integrates physics-based priors in the form of guiding force terms derived from multiple scoring functions, including the Vina score [3], Gnina score [14], Glide score [4], and Confscore [10]. By explicitly modeling a force-guidance network with these diverse energy functions, our approach steers the generative process toward lower-energy conformations, thereby improving physical plausibility while also improving the sampling efficiency. Moreover, it demonstrates robust generalization in blind docking scenarios, showing promising performance on unseen examples. This
+
+[p. 1-2, Introduction]
+physical plausibility while also improving the sampling efficiency. Moreover, it demonstrates robust generalization in blind docking scenarios, showing promising performance on unseen examples. This aligns with the growing demand for generalization in DL-based molecular
+

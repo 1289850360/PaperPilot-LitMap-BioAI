@@ -1,0 +1,17 @@
+{
+  "title": "Journal Title Here, 2022, 1–14",
+  "filename": "24922457050941689d7f9d231b8855fa_FlowDock-2412.10966.pdf",
+  "page_count": 15,
+  "card": {
+    "task": [],
+    "datasets": [],
+    "models_or_methods": [],
+    "baselines": [],
+    "metrics": [],
+    "main_result": [],
+    "limitations": [],
+    "code_availability": []
+  },
+  "dry_run_prompt_path": "work\\direct-llm-dry-run\\paper_002_prompt.txt",
+  "paper_id": "paper_002"
+}

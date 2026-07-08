@@ -1,0 +1,238 @@
+{
+  "title": "ForceFM: Enhancing Protein-Ligand Predictions",
+  "filename": "635890f07f2e4924923f85ceee82ddbe_NeurIPS-2025-forcefm-enhancing-protein-ligand-predictions-through-force-guided-flow-matching-Paper-Conference.pdf",
+  "pdf_path": "C:\\Users\\12898\\Documents\\Codex\\2026-07-06\\litmap-bioai-paperpilot-chatgpt-citation-grounded\\backend\\data\\uploads\\635890f07f2e4924923f85ceee82ddbe_NeurIPS-2025-forcefm-enhancing-protein-ligand-predictions-through-force-guided-flow-matching-Paper-Conference.pdf",
+  "abstract": "Molecular docking is a fundamental technique in structure-based drug discovery, playing a critical role in predicting the binding poses of protein-ligand complexes. While traditional docking methods are generally reliable, they are often compu- tationally expensive. Recent deep learning (DL) approaches have substantially accelerated docking and improved prediction accuracy; however, they frequently generate conformations that lack physical plausibility due to insufficient integration of physical priors. To deal with these challenges, we propose ForceFM, a novel force-guided model that integrates a force-guided network into the generation process, steering ligand poses toward low-energy, physically realistic conforma- tions. Force guidance also halves inference cost compared with the unguided approaches. Importantly, replacing the guiding potential with diverse energy functions-including Vina, Glide, Gnina, and Confscore-preserves or improves performance, underscoring the method’s generality and robustness. These results highlight ForceFM’s ability to set new standards in docking accuracy and physical consistency, surpassing the limitations of previous methods. Code is available at https://github.com/Guhuary/ForceFM.",
+  "page_count": 29,
+  "chunk_count": 98,
+  "card": {
+    "task": [
+      "Molecular docking is a fundamental technique in structure-based drug discovery, playing a critical role in predicting the binding poses of protein-ligand complexes."
+    ],
+    "datasets": [
+      "PDBBind"
+    ],
+    "models_or_methods": [
+      "diffusion",
+      "flow matching",
+      "transformer",
+      "CNN",
+      "language model",
+      "AlphaFold"
+    ],
+    "baselines": [
+      "Force guidance also halves inference cost compared with the unguided approaches.",
+      "The baseline flow matching model operates on translational, rota-",
+      "The baseline flow matching model operates on translational, rota- tional, and torsional degrees of freedom.",
+      "Extensive experiments on the PDBBind dataset demonstrate that our model outperforms existing methods in both docking accuracy and physical plausibility, consistently generating more realistic ligand poses."
+    ],
+    "metrics": [
+      "RMSD",
+      "accuracy",
+      "precision"
+    ],
+    "main_result": [
+      "Recent deep learning (DL) approaches have substantially accelerated docking and improved prediction accuracy; however, they frequently generate conformations that lack physical plausibility due to insufficient integration of physical priors.",
+      "Importantly, replacing the guiding potential with diverse energy functions-including Vina, Glide, Gnina, and Confscore-preserves or improves performance, underscoring the method’s generality and robustness.",
+      "These results highlight ForceFM’s ability to set new standards in docking accuracy and physical consistency, surpassing the limitations of previous methods.",
+      "Although these methods significantly improve efficiency ∗Corresponding authors: Bingyi Jing (jingby@sustech.edu.cn)."
+    ],
+    "limitations": [
+      "However, purely data-driven methods often fail to incorporate critical physical constraints, which can lead to unphysical poses.",
+      "This baseline approach is purely data-driven, relying on learned distributions of ligand poses, but it does not explicitly ensure low-energy or sterically valid configurations.",
+      "Furthermore, while the model successfully handles static protein-ligand interactions, it does not yet fully account for protein flexibility or the dynamic conformational changes that occur during ligand binding.",
+      "In future work, we plan to enhance ForceFM by incorporating molecular dynamics simulations to capture"
+    ],
+    "code_availability": [
+      "Code is available at https://github.com/Guhuary/ForceFM.",
+      "Implementation Details: All statistics are averaged over three random seeds.",
+      "We uses Gnina v1.3.2 in this work https://github.com/gnina/gnina/releases/tag/v1.3.2."
+    ],
+    "evidence": {
+      "datasets": [
+        {
+          "section": "Introduction",
+          "page_start": 1,
+          "page_end": 3,
+          "text": "high-throughput screening applications. (2) Comprehensive Benchmark Validations. Extensive experiments on the PDBBind dataset demonstrate that our model outperforms existing methods in both docking accuracy and physical plausib"
+        }
+      ],
+      "models_or_methods": [
+        {
+          "section": "Introduction",
+          "page_start": 1,
+          "page_end": 3,
+          "text": "fair comparison. 2.2 Guided Generation In generative modeling, controllable generation is essential to align diffusion models with desired outputs. Classifier guidance [20] and classifier-free guidance [21] are prominent approac"
+        },
+        {
+          "section": "Front matter",
+          "page_start": 1,
+          "page_end": 1,
+          "text": "ForceFM: Enhancing Protein-Ligand Predictions through Force-Guided Flow Matching Huanlei Guo1 Song Liu1 Bingyi Jing123∗ 1 Department of Statistics and Data Science, Southern University of Sc"
+        },
+        {
+          "section": "References",
+          "page_start": 10,
+          "page_end": 11,
+          "text": "Featuredock: Protein-ligand docking guided by physicochemical feature-based local environment learning using transformer. ChemRxiv preprint chemrxiv-2024-dh2rw, 2024. [10] Gabriele Corso, Hannes Stärk, Bowen Jing, Regina Barzilay,"
+        },
+        {
+          "section": "Limitations, Etc.",
+          "page_start": 18,
+          "page_end": 25,
+          "text": "vina.readthedocs.io/en/latest/docking_python.html. • Gnina builds on SMINA by additionally using a learned 3D CNN for scoring. We uses Gnina v1.3.2 in this work https://github.com/gnina/gnina/releases/tag/v1.3.2. We used th"
+        },
+        {
+          "section": "References",
+          "page_start": 10,
+          "page_end": 13,
+          "text": "uil, Ori Kabeli, Yaniv Shmueli, et al. Evolutionary-scale prediction of atomic-level protein structure with a language model. Science, 379(6637):1123–1130, 2023. 12 NeurIPS Paper Checklist 1. Claims Question: Do the main claims made i"
+        },
+        {
+          "section": "Introduction",
+          "page_start": 1,
+          "page_end": 3,
+          "text": "lly more demanding than regression-based models, they generally yield more accurate predictions. In addition, Alphafold-latest achieves huge breakthroughs, but in close-form introduction without details. DeltaDock [18] and HelixD"
+        }
+      ],
+      "metrics": [
+        {
+          "section": "Introduction",
+          "page_start": 1,
+          "page_end": 2,
+          "text": "e, Purple—sampled ligand with force guidance. and accuracy (e.g., in terms of the root-mean-square deviation, RMSD), a notable shortcoming remains: many generated conformations are physically implausible, exhibiting steric c"
+        },
+        {
+          "section": "Abstract",
+          "page_start": 1,
+          "page_end": 1,
+          "text": "xpensive. Recent deep learning (DL) approaches have substantially accelerated docking and improved prediction accuracy; however, they frequently generate conformations that lack physical plausibility due to insufficient integrat"
+        },
+        {
+          "section": "Method",
+          "page_start": 8,
+          "page_end": 8,
+          "text": "MSD and success rates of 39.7% at 2Å and 70.3% at 5Å, surpassing all baseline methods, especially in terms of precision. 4.2.3 PoseBuster Evaluation In addition to conventional metrics, we employed the PoseBuster benchmark (Fig.2"
+        }
+      ],
+      "task": [
+        {
+          "section": "Front matter",
+          "page_start": 1,
+          "page_end": 1,
+          "text": "Molecular docking is a fundamental technique in structure-based drug discovery, playing a critical role in predicting the binding poses of protein-ligand complexes."
+        }
+      ],
+      "baselines": [
+        {
+          "section": "Abstract",
+          "page_start": 1,
+          "page_end": 1,
+          "text": "Force guidance also halves inference cost compared with the unguided approaches."
+        },
+        {
+          "section": "Introduction",
+          "page_start": 1,
+          "page_end": 2,
+          "text": "The baseline flow matching model operates on translational, rota-"
+        },
+        {
+          "section": "Introduction",
+          "page_start": 1,
+          "page_end": 2,
+          "text": "The baseline flow matching model operates on translational, rota- tional, and torsional degrees of freedom."
+        },
+        {
+          "section": "Introduction",
+          "page_start": 1,
+          "page_end": 3,
+          "text": "Extensive experiments on the PDBBind dataset demonstrate that our model outperforms existing methods in both docking accuracy and physical plausibility, consistently generating more realistic ligand poses."
+        }
+      ],
+      "main_result": [
+        {
+          "section": "Abstract",
+          "page_start": 1,
+          "page_end": 1,
+          "text": "Recent deep learning (DL) approaches have substantially accelerated docking and improved prediction accuracy; however, they frequently generate conformations that lack physical plausibility due to insufficient integration of physical priors."
+        },
+        {
+          "section": "Abstract",
+          "page_start": 1,
+          "page_end": 1,
+          "text": "Importantly, replacing the guiding potential with diverse energy functions-including Vina, Glide, Gnina, and Confscore-preserves or improves performance, underscoring the method’s generality and robustness."
+        },
+        {
+          "section": "Abstract",
+          "page_start": 1,
+          "page_end": 1,
+          "text": "These results highlight ForceFM’s ability to set new standards in docking accuracy and physical consistency, surpassing the limitations of previous methods."
+        },
+        {
+          "section": "Introduction",
+          "page_start": 1,
+          "page_end": 2,
+          "text": "Although these methods significantly improve efficiency ∗Corresponding authors: Bingyi Jing (jingby@sustech.edu.cn)."
+        }
+      ],
+      "limitations": [
+        {
+          "section": "Introduction",
+          "page_start": 1,
+          "page_end": 2,
+          "text": "However, purely data-driven methods often fail to incorporate critical physical constraints, which can lead to unphysical poses."
+        },
+        {
+          "section": "Introduction",
+          "page_start": 1,
+          "page_end": 5,
+          "text": "This baseline approach is purely data-driven, relying on learned distributions of ligand poses, but it does not explicitly ensure low-energy or sterically valid configurations."
+        },
+        {
+          "section": "Conclusion",
+          "page_start": 9,
+          "page_end": 10,
+          "text": "Furthermore, while the model successfully handles static protein-ligand interactions, it does not yet fully account for protein flexibility or the dynamic conformational changes that occur during ligand binding."
+        },
+        {
+          "section": "Conclusion",
+          "page_start": 9,
+          "page_end": 10,
+          "text": "In future work, we plan to enhance ForceFM by incorporating molecular dynamics simulations to capture"
+        }
+      ],
+      "code_availability": [
+        {
+          "section": "Abstract",
+          "page_start": 1,
+          "page_end": 1,
+          "text": "Code is available at https://github.com/Guhuary/ForceFM."
+        },
+        {
+          "section": "Experiment Settings",
+          "page_start": 6,
+          "page_end": 6,
+          "text": "Implementation Details: All statistics are averaged over three random seeds."
+        },
+        {
+          "section": "Limitations, Etc.",
+          "page_start": 18,
+          "page_end": 25,
+          "text": "We uses Gnina v1.3.2 in this work https://github.com/gnina/gnina/releases/tag/v1.3.2."
+        }
+      ]
+    },
+    "verification_statuses": {
+      "task": "supported",
+      "datasets": "supported",
+      "models_or_methods": "supported",
+      "baselines": "supported",
+      "metrics": "supported",
+      "main_result": "supported",
+      "limitations": "supported",
+      "code_availability": "supported"
+    }
+  },
+  "paper_id": "test_forcefm",
+  "notes": "local smoke test"
+}

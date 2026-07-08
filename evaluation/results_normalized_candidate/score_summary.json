@@ -1,0 +1,22 @@
+{
+  "paper_count": 5,
+  "fields": [
+    "task",
+    "datasets",
+    "models_or_methods",
+    "metrics"
+  ],
+  "compared_field_count": 20,
+  "field_level_accuracy": 0.8,
+  "missing_rate": 0.05,
+  "hallucination_rate": 0.6842105263157895,
+  "missing_prediction_rows": 0,
+  "extra_prediction_rows": 0,
+  "predicted_verification_counts": {
+    "supported": 19,
+    "weak": 0,
+    "unsupported": 0,
+    "missing": 1,
+    "unknown": 0
+  }
+}

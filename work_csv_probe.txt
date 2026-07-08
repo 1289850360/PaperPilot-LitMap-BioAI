@@ -1,0 +1,1 @@
+"ligand RMSD / L-RMSD; centroid distance; Kabsch-RMSD; percentage below 2 \u00c5; percentage below 5 \u00c5; RMSD percentiles; runtime / inference speed"

@@ -1,0 +1,72 @@
+You are extracting structured information from a biomedical AI paper.
+
+Return JSON only. Do not include markdown.
+
+Use document-level evidence from the source text. Prefer canonical names.
+Extract concise normalized values. If a field is not supported, return an empty list.
+
+Field definitions:
+- task: main scientific or engineering tasks solved by the paper.
+- datasets: named datasets, benchmarks, evaluation sets, or important splits.
+- models_or_methods: proposed method, central model family, and key method components.
+- baselines: comparison methods, baseline systems, and reference tools.
+- metrics: evaluation metrics, success criteria, and efficiency measures.
+- main_result: main quantitative or qualitative results.
+- limitations: stated limitations or clear failure modes.
+- code_availability: code, repository, implementation, or data availability statements.
+
+Expected JSON schema:
+{
+  "task": [
+    "..."
+  ],
+  "datasets": [
+    "..."
+  ],
+  "models_or_methods": [
+    "..."
+  ],
+  "baselines": [
+    "..."
+  ],
+  "metrics": [
+    "..."
+  ],
+  "main_result": [
+    "..."
+  ],
+  "limitations": [
+    "..."
+  ],
+  "code_availability": [
+    "..."
+  ]
+}
+
+Paper title:
+Journal Title Here, 2022, 1–14
+
+Abstract:
+Motivation Powerful generative AI models of protein-ligand structure have recently been proposed, but few of these methods support both flexible protein-ligand docking and affinity estimation. Of those that do, none can directly model multiple binding ligands concurrently or have been rigorously benchmarked on pharmacologically relevant drug targets, hindering their widespread adoption in drug discovery efforts. Results In this work, we propose FlowDock, the first deep geometric generative model based on conditional flow matching that learns to directly map unbound (apo) structures to their bound (holo) counterparts for an arbitrary number of binding ligands. Furthermore, FlowDock provides predicted structural confidence scores and binding affinity values with each of its generated protein-ligand complex structures, enabling fast virtual screening of new (multi-ligand) drug targets. For the well-known PoseBusters Benchmark dataset, FlowDock outperforms single-sequence AlphaFold 3 with a 51% blind docking success rate using unbound (apo) protein input structures and without any information derived from multiple sequence alignments, and for the challenging new DockGen-E dataset, FlowDock outperforms single-sequence AlphaFold 3 and matches single-sequence Chai-1 for binding pocket generalization. Additionally, in the ligand category of the 16th community-wide Critical Assessment of Techniques for Structure Prediction (CASP16), FlowDock ranked among the top-5 methods for pharmacological binding affinity estimation across 140 protein-ligand complexes, demonstrating the efficacy of its learned representations in virtual screening. Availability Source code, data, and pre-trained models are available at https://github.com/ BioinfoMachineLearning/FlowDock. Key words: Generative...
+
+Source text:
+[p. 1-1, Front matter]
+Journal Title Here, 2022, 1–14 doi: DOI HERE Advance Access Publication Date: Day Month Year Paper FlowDock: Geometric Flow Matching for Generative Protein-Ligand Docking and Affinity Prediction Alex Morehead 1,∗and Jianlin Cheng 1 1Department of Electrical Engineering & Computer Science, NextGen Precision Health, University of Missouri-Columbia, W1024 Lafferre Hall, 65211, Missouri, USA ∗Corresponding author. acmwhb@missouri.edu FOR PUBLISHER ONLY Received on Date Month Year; revised on Date Month Year; accepted on Date Month Year
+
+[p. 1-1, Abstract]
+Abstract Motivation Powerful generative AI models of protein-ligand structure have recently been proposed, but few of these methods support both flexible protein-ligand docking and affinity estimation. Of those that do, none can directly model multiple binding ligands concurrently or have been rigorously benchmarked on pharmacologically relevant drug targets, hindering their widespread adoption in drug discovery efforts.
+
+[p. 1-1, Results]
+Results In this work, we propose FlowDock, the first deep geometric generative model based on conditional flow matching that learns to directly map unbound (apo) structures to their bound (holo) counterparts for an arbitrary number of binding ligands. Furthermore, FlowDock provides predicted structural confidence scores and binding affinity values with each of its generated protein-ligand complex structures, enabling fast virtual screening of new (multi-ligand) drug targets. For the well-known PoseBusters Benchmark dataset, FlowDock outperforms single-sequence AlphaFold 3 with a 51% blind docking success rate using unbound (apo) protein input structures and without any information derived from multiple sequence alignments, and for the challenging new DockGen-E dataset, FlowDock outperforms single-sequence AlphaFold 3 and matches single-sequence Chai-1 for binding pocket generalization. Additionally, in the ligand category of the 16th community-wide Critical Assessment of Techniques for Structure Prediction (CASP16), FlowDock ranked among the top-5 methods for pharmacological binding affinity estimation across 140 protein-ligand complexes, demonstrating the efficacy of its learned representations in virtual screening. Availability Source code, data, and pre-trained models are available at https://github.com/ BioinfoMachineLearning/FlowDock. Key words: Generative AI model, flow matching, protein-ligand structure, binding affinity
+
+[p. 1-2, Introduction]
+1. Introduction Interactions between proteins and small molecules (ligands) drive many of life’s fundamental processes and, as such, are of great interest to biochemists, biologists, and drug discoverers. Historically, elucidating the structure, and therefore the function, of such interactions has required that considerable intellectual and financial resources be dedicated to determining the interactions of a single biomolecular complex. For example, techniques such as X-ray diffraction and cryo-electron microscopy have traditionally been effective in biomolecular structure determination, however, resolving even a single biomolecule’s crystal structure can be extremely time and resource-intensive. Recently, new machine learning (ML) methods such as AlphaFold 3 (AF3) (Abramson et al., 2024) have been proposed for directly predicting the structure of an arbitrary biomolecule from its primary sequence, offering the potential to expand our understanding of life’s molecules and their implications in disease, energy research, and beyond. Although powerful models of general biomolecular structure are compelling, they currently do not provide one with an estimate of the binding affinity of a predicted protein-ligand complex, which may indicate whether a pair of molecules truly bind to each other in vivo. It is desirable to predict both the structure of a protein-ligand complex and the binding affinity between them via one single ML system (Dhakal et al., 2022). Moreover, © The Author 2022. Published by Oxford University Press. All rights reserved. For permissions, please e-mail: journals.permissions@oup.com 1 arXiv:2412.10966v3 [cs.LG] 24 Mar 2025 2 Morehead et al. recent generative models of biomolecular structure are primarily based on noise schedules following Gaussian diffu
+
+[p. 1-2, Introduction]
+urnals.permissions@oup.com 1 arXiv:2412.10966v3 [cs.LG] 24 Mar 2025 2 Morehead et al. recent generative models of biomolecular structure are primarily based on noise schedules following Gaussian diffusion model
+
+[p. 1-2, Introduction]
+issions@oup.com 1 arXiv:2412.10966v3 [cs.LG] 24 Mar 2025 2 Morehead et al. recent generative models of biomolecular structure are primarily based on noise schedules following Gaussian diffusion model methodology which, albeit a powerful modeling framework, lacks interpretability in the context of biological studies of molecular interactions. In this work, we aim to address these concerns with a new state-of-the-art hybrid (structure & affinity prediction) generative model called FlowDock for flow matching-based protein-ligand structure prediction and binding affinity estimation, which allows one to interpretably inspect the model’s structure prediction trajectories to interrogate its common molecular interactions and to screen drug candidates quickly using its predicted binding affinities.
+
+[p. 2-2, Related Work]
+2. Related work Molecular docking with deep learning. Over the last few years, deep learning (DL) algorithms (in particular geometric variants) have emerged as a popular methodology for performing end-to-end differentiable molecular docking. Models such as EquiBind (St¨ark et al., 2022) and TankBind (Lu et al., 2022) initiated a wave of interest in researching graph-based approaches to modeling protein-ligand interactions, leading to many follow- up works. Important to note is that most of such DL- based docking models were designed to supplement conventional modeling methods for protein-ligand docking such as Au

@@ -1,0 +1,70 @@
+You are extracting structured information from a biomedical AI paper.
+
+Return JSON only. Do not include markdown.
+
+Use document-level evidence from the source text. Prefer canonical names.
+Extract concise normalized values. If a field is not supported, return an empty list.
+
+Field definitions:
+- task: main scientific or engineering tasks solved by the paper.
+- datasets: named datasets, benchmarks, evaluation sets, or important splits.
+- models_or_methods: proposed method, central model family, and key method components.
+- baselines: comparison methods, baseline systems, and reference tools.
+- metrics: evaluation metrics, success criteria, and efficiency measures.
+- main_result: main quantitative or qualitative results.
+- limitations: stated limitations or clear failure modes.
+- code_availability: code, repository, implementation, or data availability statements.
+
+Expected JSON schema:
+{
+  "task": [
+    "..."
+  ],
+  "datasets": [
+    "..."
+  ],
+  "models_or_methods": [
+    "..."
+  ],
+  "baselines": [
+    "..."
+  ],
+  "metrics": [
+    "..."
+  ],
+  "main_result": [
+    "..."
+  ],
+  "limitations": [
+    "..."
+  ],
+  "code_availability": [
+    "..."
+  ]
+}
+
+Paper title:
+NeuralPLexer3: Accurate Biomolecular Complex
+
+Abstract:
+Structure determination is essential to a mechanistic understanding of diseases and the development of novel therapeutics. Machine-learning-based structure prediction methods have made significant advancements by computationally predicting protein and bioassembly structures from sequences and molecular topology alone. Despite substantial progress in the field, challenges remain to deliver structure prediction models to real-world drug discovery. Here, we present NeuralPLexer3 – a physics-inspired flow-based generative model that achieves state-of-the-art prediction accuracy on key biomolecular interaction types and improves training and sampling efficiency compared to its predecessors and alternative methodologies [1, 2]. Examined through newly developed benchmarking strategies, NeuralPLexer3 excels in vital areas that are crucial to structure-based drug design, such as physical validity and ligand-induced conformational changes.
+
+Source text:
+[p. 1-1, Front matter]
+NeuralPLexer3: Accurate Biomolecular Complex Structure Prediction with Flow Models Zhuoran Qiao∗,†, Feizhi Ding∗, Thomas Dresselhaus∗, Mia A. Rosenfeld∗, Xiaotian Han∗, Owen Howell, Aniketh Iyengar, Stephen Opalenski, Anders S. Christensen, Sai Krishna Sirumalla, Frederick R. Manby, Thomas F. Miller III, Matthew Welborn∗,† Iambic Therapeutics, San Diego, CA 92121 *Core Contributors. †Correspondence to: zhuoran.qiao@iambic.ai; matt@iambic.ai.
+
+[p. 1-1, Abstract]
+ABSTRACT Structure determination is essential to a mechanistic understanding of diseases and the development of novel therapeutics. Machine-learning-based structure prediction methods have made significant advancements by computationally predicting protein and bioassembly structures from sequences and molecular topology alone. Despite substantial progress in the field, challenges remain to deliver structure prediction models to real-world drug discovery. Here, we present NeuralPLexer3 – a physics-inspired flow-based generative model that achieves state-of-the-art prediction accuracy on key biomolecular interaction types and improves training and sampling efficiency compared to its predecessors and alternative methodologies [1, 2]. Examined through newly developed benchmarking strategies, NeuralPLexer3 excels in vital areas that are crucial to structure-based drug design, such as physical validity and ligand-induced conformational changes.
+
+[p. 1-1, Introduction]
+Introduction For decades, predicting the 3D structures of proteins has been a transformative goal in structural biology and drug discovery. Experimental techniques like X-ray crystallography and cryo-electron microscopy have provided invaluable structural data. Still, these methods are resource-intensive and time-consuming, making it challenging to scale their application across the immense diversity of proteins and small molecules. Most drug development programs still rely on these experimental structures, leaving countless therapeutic opportunities and hypotheses unexplored. Breakthroughs in AI-driven structure prediction, notably with AlphaFold2 (AF2) [3], brought the field closer to experimental accuracy. Despite this progress, a significant challenge remained, that is, to accurately model interactions between proteins and different biomolecules, particularly small molecules, nucleic acids, and other proteins. Understanding and accurately modeling these interactions is essential for adapting structure prediction models into effective drug discovery workflows. NeuralPLexer (NP) [4] was one of the first AI models to directly address these complex interactions by pioneering the use of AI for protein-ligand structures, with NeuralPLexer2 (NP2) [2] advancing further in prediction accuracy and covering all essential categories of biomolecules including protein complexes, nucleic acids, small molecules, and covalent modifications. AlphaFold3 (AF3) [1] recently set a new benchmark in interaction modeling. While taking us another step further for drug discovery applications, this geometrical approach to interaction prediction still limits its usability. Drug discovery requires precise, atom-level details on how small molecules interact with specific protein atoms and how the
+
+[p. 1-1, Introduction]
+s geometrical approach to interaction prediction still limits its usability. Drug discovery requires precise, atom-level details on how small molecules interact with specific protein atoms and how these interactions induce conformational changes. Rapid screening of large numbers of potential compounds is also
+
+[p. 1-2, Introduction]
+tom-level details on how small molecules interact with specific protein atoms and how these interactions induce conformational changes. Rapid screening of large numbers of potential compounds is also necessary. 1 arXiv:2412.10743v2 [cs.LG] 18 Dec 2024 Specifically, several technical challenges persist in state-of-the-art structure prediction models: • Unphysical hallucinations: AF3 and related methods [1, 5, 6] sometimes generate structures that are not physically plausible, such as ligands with incorrect chiral centers, unrealistic torsion angles, or misfolded chains for disordered regions. • Computational cost: The resource-intensive nature of current diffusion-based structure predictors can limit their scalability in large-scale studies, such as virtual screening. • Performance assessment for drug discovery: There is a need for thorough model evaluation in drug discovery contexts, particularly in predicting ligand-induced protein conformational changes and the recovery of physical interactions such as hydrogen bonds [7, 8]. Here we present NeuralPLexer3 (NP3), offering the following key contributions: • NP3 improves protein-ligand binding structure prediction with greater accuracy than AF3 while retaining broad applicability across all categories of biomolecular interactions. • By combining physics-informed priors, fast samplers with hardware-aware optimizations, NP3 typically delivers a prediction within seconds of GPU time while preserving accuracy. • We introduce novel benchmarks to evaluate conformational predictions related to binding pocket/ligand interactions and their potential effects on protein conformation across a diverse dataset. For specific protein classes, such as kinases, NP3 provides downstream functional insights, such as predicting protein inactiv
+
+[p. 1-2, Introduction]
+their potential effects on protein conformation across a diverse dataset. For specific protein classes, such as kinases, NP3 provides downstream functional insights, such as predicting protein inactivation
+

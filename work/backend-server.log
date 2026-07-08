@@ -1,0 +1,14 @@
+INFO:     Will watch for changes in these directories: ['C:\\Users\\12898\\Documents\\Codex\\2026-07-06\\litmap-bioai-paperpilot-chatgpt-citation-grounded\\backend']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1500] using WatchFiles
+INFO:     Started server process [27616]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:60490 - "GET /health HTTP/1.1" 200 OK
+INFO:     Will watch for changes in these directories: ['C:\\Users\\12898\\Documents\\Codex\\2026-07-06\\litmap-bioai-paperpilot-chatgpt-citation-grounded\\backend']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [32668] using WatchFiles
+INFO:     Started server process [29168]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:62899 - "GET /health HTTP/1.1" 200 OK

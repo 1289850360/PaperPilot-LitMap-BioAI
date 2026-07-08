@@ -1,0 +1,17 @@
+{
+  "title": "ForceFM: Enhancing Protein-Ligand Predictions",
+  "filename": "72b82fd6ee494c96a1155e9923a1c5ac_NeurIPS-2025-forcefm-enhancing-protein-ligand-predictions-through-force-guided-flow-matching-Paper-Conference.pdf",
+  "page_count": 29,
+  "card": {
+    "task": [],
+    "datasets": [],
+    "models_or_methods": [],
+    "baselines": [],
+    "metrics": [],
+    "main_result": [],
+    "limitations": [],
+    "code_availability": []
+  },
+  "dry_run_prompt_path": "work\\direct-llm-dry-run\\paper_005_prompt.txt",
+  "paper_id": "paper_005"
+}

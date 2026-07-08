@@ -1,0 +1,72 @@
+You are extracting structured information from a biomedical AI paper.
+
+Return JSON only. Do not include markdown.
+
+Use document-level evidence from the source text. Prefer canonical names.
+Extract concise normalized values. If a field is not supported, return an empty list.
+
+Field definitions:
+- task: main scientific or engineering tasks solved by the paper.
+- datasets: named datasets, benchmarks, evaluation sets, or important splits.
+- models_or_methods: proposed method, central model family, and key method components.
+- baselines: comparison methods, baseline systems, and reference tools.
+- metrics: evaluation metrics, success criteria, and efficiency measures.
+- main_result: main quantitative or qualitative results.
+- limitations: stated limitations or clear failure modes.
+- code_availability: code, repository, implementation, or data availability statements.
+
+Expected JSON schema:
+{
+  "task": [
+    "..."
+  ],
+  "datasets": [
+    "..."
+  ],
+  "models_or_methods": [
+    "..."
+  ],
+  "baselines": [
+    "..."
+  ],
+  "metrics": [
+    "..."
+  ],
+  "main_result": [
+    "..."
+  ],
+  "limitations": [
+    "..."
+  ],
+  "code_availability": [
+    "..."
+  ]
+}
+
+Paper title:
+Published as a conference paper at ICLR 2025
+
+Abstract:
+Diffusion models have emerged as a successful approach for molecular docking, but they often cannot model protein flexibility or generate nonphysical poses. We argue that both these challenges can be tackled by framing the problem as a trans- port between distributions. Still, existing paradigms lack the flexibility to define effective maps between such complex distributions. To address this limitation, we propose Unbalanced Flow Matching, a generalization of Flow Matching (FM) that allows trading off sample efficiency with approximation accuracy and enables more accurate transport. Empirically, we apply Unbalanced FM on flexible docking and structure relaxation, demonstrating our ability to model protein flexibility and generate energetically favorable poses1. On the PDBBind docking benchmark, our method FLEXDOCK improves the docking performance while increasing the proportion of energetically favorable poses from 30% to 73%.
+
+Source text:
+[p. 1-1, Front matter]
+Published as a conference paper at ICLR 2025 COMPOSING UNBALANCED FLOWS FOR FLEXIBLE DOCKING AND RELAXATION Gabriele Corso ∗ MIT Vignesh Ram Somnath ∗ ETH Zurich Noah Getz ∗ MIT Regina Barzilay MIT Tommi Jaakkola MIT Andreas Krause ETH Zurich
+
+[p. 1-1, Abstract]
+ABSTRACT Diffusion models have emerged as a successful approach for molecular docking, but they often cannot model protein flexibility or generate nonphysical poses. We argue that both these challenges can be tackled by framing the problem as a trans- port between distributions. Still, existing paradigms lack the flexibility to define effective maps between such complex distributions. To address this limitation, we propose Unbalanced Flow Matching, a generalization of Flow Matching (FM) that allows trading off sample efficiency with approximation accuracy and enables more accurate transport. Empirically, we apply Unbalanced FM on flexible docking and structure relaxation, demonstrating our ability to model protein flexibility and generate energetically favorable poses1. On the PDBBind docking benchmark, our method FLEXDOCK improves the docking performance while increasing the proportion of energetically favorable poses from 30% to 73%. 1
+
+[p. 1-1, Introduction]
+INTRODUCTION The mechanism of action of most drug molecules is often rationalized by studying how the molecule binds to one or more key proteins. Computationally, predicting the structure of these binding interactions constitutes the molecular docking task. Over the past decades, significant progress has been made in molecular docking, initially through classical search techniques and more recently with deep learning models. However, these methods primarily focus on rigid docking, assuming the protein has a fixed structure. Proteins however are flexible entities and often undergo conformational changes during docking. Computational methods for understanding flexibility fall into two categories: co-folding and flexible docking. Co-folding involves predicting the bound structure of the protein and the ligand from scratch as a single task. Flexible docking, instead, aims at only modeling the limited structural transformation between unbound and bound protein structures, a formulation that allows for more efficient, interpretable, and controllable methods. However, existing flexible docking methods have so far failed to provide satisfactory levels of accuracy. Among these, search-based techniques struggle to account for protein degrees of freedom due to the significantly increased dimensionality of the search space (Koes et al., 2013; McNutt et al., 2021). Deep learning methods have improved on this by extending diffusion or flow processes to include the protein flexibility, but these either severely limit the degrees-of-freedoms or implicitly force the model to learn protein folding entirely, resulting in structure predictions that are frequently inaccurate (Qiao et al., 2024; Lu et al., 2024). Furthermore, recent works have highlighted the tendency of ML docking models to
+
+[p. 1-1, Introduction]
+olding entirely, resulting in structure predictions that are frequently inaccurate (Qiao et al., 2024; Lu et al., 2024). Furthermore, recent works have highlighted the tendency of ML docking models to generate non-physical structures (Buttenschoen et al., 2024).
+
+[p. 1-2, Introduction]
+equently inaccurate (Qiao et al., 2024; Lu et al., 2024). Furthermore, recent works have highlighted the tendency of ML docking models to generate non-physical structures (Buttenschoen et al., 2024). Addressing the challenges above requires new techniques for precise transport between the complex distributions of unbound (apo) and bound (holo) protein structures. Flow matching (FM) (Lipman et al., 2022; Albergo et al., 2023), in principle, can learn such a transport. However, we show that ∗Equal contribution. Correspondence to gcorso@csail.mit.edu and vsomnath@inf.ethz.ch. 1Our code and models are available at https://github.com/vsomnath/flexdock. 1 Published as a conference paper at ICLR 2025 Manifold Docking Structure Relaxation Manifold Unbalanced Flow Matching: 𝜀 = 4Å Euclidean Unbalanced Flow Matching: 𝜀 = 2Å holo structures apo structures predicted structures bound structures Figure 1: Schematic representation of the FLEXDOCK docking framework formed by the chaining of two unbalanced flows. The first (details in Section 4.1) is aimed at resolving the approximate pose by working on longer flows but reduced degrees of freedom, and the second (Section 4.2) aims at relaxing the generated structure producing high-quality poses. directly applying flow matching to this task results in complex mappings, a difficult learning task, and consequently poor performance. To address this, we propose Unbalanced Flow Matching, where we relax the marginal constraints of FM through a more careful choice of coupling distribution. We study these choices both formally and empirically, resulting in a higher docking performance. We further consider composing short unbalanced flows and show that, in the limit, this corresponds to local likelihood gradient steps towards the desired marginal
+
+[p. 1-2, Introduction]
+ting in a higher docking performance. We further consider composing short unbalanced flows and show that, in the limit, this corresponds to local likelihood gradient steps towards the desired marginal.
+
+[p. 1-2, Introduction]
+ng in a higher docking performance. We further consider composing short unbalanced flows and show that, in the limit, this corresponds to local likelihood gradient steps towards the desired marginal. Based on the insights above, we construct a new flexible pocket-based docking method FLEXDOCK by chaining two separate Unbalanced Flows (see Figure 1). The first, referred to as manifold docking, is defined on a low dimensional space and aims to predict the approximate ligand pose and protein structural change. The second, relaxation, is defined on the full Euclidean space but w

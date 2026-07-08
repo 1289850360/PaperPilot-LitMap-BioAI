@@ -1,0 +1,2 @@
+paper_id,title,filename,folder,page_count,task,datasets,models_or_methods,baselines,metrics,main_result,limitations,code_availability,field_statuses,verification_statuses
+1,Example Paper,example.pdf,Uncategorized,10,protein-ligand docking,PDBBind | CrossDocked,flow matching | diffusion model,AutoDock Vina,RMSD | docking score,Improves docking accuracy,Does not fully model protein flexibility,Code available on GitHub,,

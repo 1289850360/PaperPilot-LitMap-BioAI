@@ -1,0 +1,16 @@
+.venv/
+node_modules/
+.next/
+__pycache__/
+*.pyc
+*.tsbuildinfo
+*.db
+*.sqlite
+backend/data/paperpilot.db
+backend/data/uploads/*
+!backend/data/uploads/.gitkeep
+evaluation/results/
+experiments/outputs/*
+!experiments/outputs/.gitkeep
+.env
+.DS_Store

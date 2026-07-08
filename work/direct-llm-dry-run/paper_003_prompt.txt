@@ -1,0 +1,72 @@
+You are extracting structured information from a biomedical AI paper.
+
+Return JSON only. Do not include markdown.
+
+Use document-level evidence from the source text. Prefer canonical names.
+Extract concise normalized values. If a field is not supported, return an empty list.
+
+Field definitions:
+- task: main scientific or engineering tasks solved by the paper.
+- datasets: named datasets, benchmarks, evaluation sets, or important splits.
+- models_or_methods: proposed method, central model family, and key method components.
+- baselines: comparison methods, baseline systems, and reference tools.
+- metrics: evaluation metrics, success criteria, and efficiency measures.
+- main_result: main quantitative or qualitative results.
+- limitations: stated limitations or clear failure modes.
+- code_availability: code, repository, implementation, or data availability statements.
+
+Expected JSON schema:
+{
+  "task": [
+    "..."
+  ],
+  "datasets": [
+    "..."
+  ],
+  "models_or_methods": [
+    "..."
+  ],
+  "baselines": [
+    "..."
+  ],
+  "metrics": [
+    "..."
+  ],
+  "main_result": [
+    "..."
+  ],
+  "limitations": [
+    "..."
+  ],
+  "code_availability": [
+    "..."
+  ]
+}
+
+Paper title:
+Harmonic Self-Conditioned Flow Matching
+
+Abstract:
+A significant amount of protein function requires binding small molecules, including enzymatic catalysis. As such, designing binding pockets for small molecules has several impactful appli- cations ranging from drug synthesis to energy storage. Towards this goal, we first develop HAR- MONICFLOW, an improved generative process over 3D protein-ligand binding structures based on our self-conditioned flow matching objective. FLOWSITE extends this flow model to jointly gen- erate a protein pocket’s discrete residue types and the molecule’s binding 3D structure. We show that HARMONICFLOW improves upon state-of- the-art generative processes for docking in sim- plicity, generality, and average sample quality in pocket-level docking. Enabled by this structure modeling, FLOWSITE designs binding sites sub- stantially better than baseline approaches.
+
+Source text:
+[p. 1-1, Front matter]
+Harmonic Self-Conditioned Flow Matching for joint Multi-Ligand Docking and Binding Site Design Hannes Stark 1 Bowen Jing 1 Regina Barzilay 1 Tommi Jaakkola 1
+
+[p. 1-1, Abstract]
+Abstract A significant amount of protein function requires binding small molecules, including enzymatic catalysis. As such, designing binding pockets for small molecules has several impactful appli- cations ranging from drug synthesis to energy storage. Towards this goal, we first develop HAR- MONICFLOW, an improved generative process over 3D protein-ligand binding structures based on our self-conditioned flow matching objective. FLOWSITE extends this flow model to jointly gen- erate a protein pocket’s discrete residue types and the molecule’s binding 3D structure. We show that HARMONICFLOW improves upon state-of- the-art generative processes for docking in sim- plicity, generality, and average sample quality in pocket-level docking. Enabled by this structure modeling, FLOWSITE designs binding sites sub- stantially better than baseline approaches.
+
+[p. 1-1, Introduction]
+1. Introduction Designing proteins that can bind small molecules has many applications, ranging from drug synthesis to energy storage or gene editing. Indeed, a key part of any protein’s function derives from its ability to bind and interact with other molec- ular species. For example, we may design proteins that act as antidotes that sequester toxins or design enzymes that enable chemical reactions through catalysis, which plays a major role in most biological processes. We develop FLOWSITE to address this design challenge by building on recent advances in deep learning (DL) based protein de- sign (Dauparas et al., 2022) and protein-molecule docking (Corso et al., 2023). Specifically, we aim to design protein pockets to bind a certain small molecule (called ligand). We assume that 1CSAIL, Massachusetts Institute of Technology. Correspon- dence to: Hannes Stark <hstark@mit.edu>. Proceedings of the 41 st International Conference on Machine Learning, Vienna, Austria. PMLR 235, 2024. Copyright 2024 by the author(s). Figure 1. Binding site design. Given the backbone (green) and multi-ligand without structure, FLOWSITE generates residue types and structure (orange) to bind the multi-ligand and its jointly gen- erated structure (blue). The majority of the pocket is omitted for visibility. we are given a protein pocket via the 3D backbone atom locations of its residues as well as the 2D chemical graph of the ligand. We do not assume any knowledge of the 3D structure or the binding pose of the ligand. Based on this information, our goal is to predict the amino acid identities for the given backbone locations (see Figure 1). We also consider the more challenging task of designing pockets that simultaneously bind multiple molecules and ions (which we call multi-ligand). Such mult
+
+[p. 1-1, Introduction]
+he given backbone locations (see Figure 1). We also consider the more challenging task of designing pockets that simultaneously bind multiple molecules and ions (which we call multi-ligand). Such multi-ligand binding proteins are
+
+[p. 1-2, Introduction]
+ee Figure 1). We also consider the more challenging task of designing pockets that simultaneously bind multiple molecules and ions (which we call multi-ligand). Such multi-ligand binding proteins are important, for example, in enzyme design, where the ligands correspond to reactants. This task has not been addressed by deep learning yet. While deep learning has been successful in designing proteins that can bind to other proteins (Watson et al., 2023), designing (multi-)ligand binders is different and arguably harder in various aspects. For example, no evolutionary information is directly available, unlike when modeling interactions between amino acids only. The existing approaches, such as designing 6 drug binding proteins Polizzi & DeGrado (2020) or a single enzyme Yeh et al. (2023), build on expert knowledge and require manual steps. Therefore, we develop 1 arXiv:2310.05764v4 [cs.LG] 30 May 2024 Harmonic Prior Flow Matching FLOWSITE as a more general and automated approach and the first deep learning solution for designing pockets that bind small molecules. FLOWSITE jointly generates discrete (residue identities) and continuous (ligand pose) variables. Our flow matching train- ing criterion guides the model to learn a self-conditioned flow that jointly generates the contact residues and the (multi-)ligand 3D binding pose structures. To achieve this, we first develop HARMONICFLOW as a suitable generative process for 3D poses of (multi-)ligands. FLOWSITE extends this process to residue types. Starting from initial residue types and ligand atom locations sampled from a harmonic prior FLOWSITE updates them by iteratively following the learned vector field, as illustrated in Figure 2. The HARMONICFLOW component of FLOWSITE performs the task known as docking, i.e., it real
+
+[p. 1-2, Introduction]
+onic prior FLOWSITE updates them by iteratively following the learned vector field, as illustrated in Figure 2. The HARMONICFLOW component of FLOWSITE performs the task known as docking, i.e., it realizes the 3D binding
+
+[p. 1-2, Introduction]
+updates them by iteratively following the learned vector field, as illustrated in Figure 2. The HARMONICFLOW component of FLOWSITE performs the task known as docking, i.e., it realizes the 3D binding pose of the multi-ligand. As a method, it is remarkably simple in comparison to existing generative processes for docking, including the state-of-the-art product-space diffu- sion process of DIFFDOCK (Corso et al., 2023) that operates on ligand’s center of mass, orientation, and torsion angles. HARMONICFLOW simply updates the cartesian coordinates of the atoms, yet manages to produce chemically plausi- ble molecular structures without restricting ligand flexibil- ity to torsions. Moreover, HARMONICFLOW outperforms product-space diffusion in average sample quality on 

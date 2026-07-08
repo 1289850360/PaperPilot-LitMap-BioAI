@@ -1,0 +1,5 @@
+field,compared,field_accuracy,missing_rate,hallucination_rate,value_precision,value_recall,value_f1,gold_value_count,pred_value_count,matched_gold_values,matched_pred_values,missed_gold_values,unsupported_pred_values,exact_or_strong,partial,incorrect,missing,hallucinated
+task,23,0.7609,0.0,0.6957,0.6164,0.4206,0.5,107,73,45,45,62,28,14,7,2,0,16
+datasets,23,0.9565,0.0435,0.1364,0.9167,0.6346,0.75,104,72,66,66,38,6,22,0,1,1,3
+models_or_methods,23,1.0,0.0,0.7391,0.7273,0.5864,0.6493,191,154,112,112,79,42,23,0,0,0,17
+metrics,23,1.0,0.0,0.5652,0.8733,0.7044,0.7798,274,221,193,193,81,28,23,0,0,0,13

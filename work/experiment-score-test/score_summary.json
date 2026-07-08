@@ -1,0 +1,26 @@
+{
+  "paper_count": 1,
+  "fields": [
+    "task",
+    "datasets",
+    "models_or_methods",
+    "baselines",
+    "metrics",
+    "main_result",
+    "limitations",
+    "code_availability"
+  ],
+  "compared_field_count": 8,
+  "field_level_accuracy": 1.0,
+  "missing_rate": 0.0,
+  "hallucination_rate": 0.0,
+  "missing_prediction_rows": 0,
+  "extra_prediction_rows": 0,
+  "predicted_verification_counts": {
+    "supported": 8,
+    "weak": 0,
+    "unsupported": 0,
+    "missing": 0,
+    "unknown": 0
+  }
+}

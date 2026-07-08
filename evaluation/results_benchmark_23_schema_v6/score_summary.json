@@ -1,0 +1,29 @@
+{
+  "paper_count": 23,
+  "fields": [
+    "task",
+    "datasets",
+    "models_or_methods",
+    "metrics"
+  ],
+  "compared_field_count": 92,
+  "field_level_accuracy": 0.9239130434782609,
+  "missing_rate": 0.0,
+  "hallucination_rate": 0.7934782608695652,
+  "value_precision": 0.5056726094003241,
+  "value_recall": 0.552212389380531,
+  "value_f1": 0.5279187817258884,
+  "gold_value_count": 565,
+  "pred_value_count": 617,
+  "matched_gold_values": 312,
+  "matched_pred_values": 312,
+  "missing_prediction_rows": 0,
+  "extra_prediction_rows": 0,
+  "predicted_verification_counts": {
+    "supported": 65,
+    "weak": 24,
+    "unsupported": 3,
+    "missing": 0,
+    "unknown": 0
+  }
+}

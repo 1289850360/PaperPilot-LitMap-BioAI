@@ -1,0 +1,9 @@
+field,compared,field_accuracy,missing_rate,hallucination_rate,exact_or_strong,partial,incorrect,missing,hallucinated
+task,1,1.0,0.0,0.0,1,0,0,0,0
+datasets,1,1.0,0.0,0.0,1,0,0,0,0
+models_or_methods,1,1.0,0.0,0.0,1,0,0,0,0
+baselines,1,1.0,0.0,0.0,1,0,0,0,0
+metrics,1,1.0,0.0,0.0,1,0,0,0,0
+main_result,1,1.0,0.0,0.0,1,0,0,0,0
+limitations,1,1.0,0.0,0.0,1,0,0,0,0
+code_availability,1,1.0,0.0,0.0,1,0,0,0,0
